@@ -6,4 +6,4 @@ Vue Router, Pinia and @tanstack/vue-query. API calls are wrapped with an axios i
 for maintainable request management. Detail pages now fetch single records using dedicated
 vue-query hooks.
 
-Additional features include dynamic detail routing, filtering controls and password toggles.
+Additional features include dynamic detail routing, filtering controls, password toggles and a simple login page supporting local and LDAP modes.
