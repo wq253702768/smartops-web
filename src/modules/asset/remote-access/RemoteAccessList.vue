@@ -1,10 +1,14 @@
 <template>
   <div>
-    <el-select v-model="type" placeholder="Type" class="mb-2">
+    <el-select v-model="type" placeholder="Type" class="mb-2 mr-2">
       <el-option label="All" value="" />
       <el-option label="SSH" value="SSH" />
       <el-option label="RDP" value="RDP" />
       <el-option label="VNC" value="VNC" />
+    </el-select>
+    <el-select v-if="props.siteId === undefined" v-model="siteId" placeholder="Site" class="mb-2 mr-2">
+      <el-option label="All" value="" />
+      <el-option v-for="s in sites" :key="s.id" :label="s.name" :value="s.id" />
     </el-select>
     <el-input v-model="search" placeholder="Search" class="mb-2" />
     <el-button type="primary" class="mb-2" @click="openForm">Add</el-button>
@@ -26,17 +30,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRemoteAccessList, useDeleteRemoteAccess } from '../api'
+import { ref, watch, defineProps } from 'vue'
+import { useRemoteAccessList, useDeleteRemoteAccess, useSiteList } from '../api'
 import TableWrapper from '@/components/TableWrapper.vue'
 import RemoteAccessForm from './RemoteAccessForm.vue'
 import RemoteAccessDeleteDialog from './RemoteAccessDeleteDialog.vue'
 import { usePaginated } from '@/composables/usePaginated'
 
+const props = defineProps<{ siteId?: number }>()
+const siteId = ref(props.siteId ?? '')
 const type = ref('')
 const search = ref('')
+const { data: sites } = useSiteList()
 const { page, pageSize, total, setTotal, onChange } = usePaginated()
-const { data, refetch } = useRemoteAccessList({ type, search, page, pageSize })
+const { data, refetch } = useRemoteAccessList({ type, search, siteId, page, pageSize })
 watch(data, () => setTotal(data.value?.length || 0))
 
 const list = data

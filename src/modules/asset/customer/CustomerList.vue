@@ -12,6 +12,7 @@
         <template #default="{ row }">
           <el-button size="small" @click="edit(row)">Edit</el-button>
           <el-button size="small" type="danger" @click="remove(row)">Delete</el-button>
+          <el-button size="small" type="primary" @click="view(row)">Detail</el-button>
         </template>
       </el-table-column>
     </TableWrapper>
@@ -23,6 +24,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useCustomerList, useDeleteCustomer } from '../api'
+import { useRouter } from 'vue-router'
 import TableWrapper from '@/components/TableWrapper.vue'
 import CustomerForm from './CustomerForm.vue'
 import CustomerDeleteDialog from './CustomerDeleteDialog.vue'
@@ -58,5 +60,10 @@ const { mutate } = useDeleteCustomer()
 const doDelete = () => {
   mutate(current.value.id)
   deleteVisible.value = false
+}
+
+const router = useRouter()
+const view = (row: any) => {
+  router.push(`/asset/customer/${row.id}`)
 }
 </script>

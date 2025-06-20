@@ -18,7 +18,11 @@
         <el-input v-model="form.username" />
       </el-form-item>
       <el-form-item label="Password" prop="passwordEncrypted">
-        <el-input type="password" v-model="form.passwordEncrypted" />
+        <el-input :type="showPassword ? 'text' : 'password'" v-model="form.passwordEncrypted">
+          <template #suffix>
+            <el-button text @click="showPassword = !showPassword">{{ showPassword ? 'Hide' : 'Show' }}</el-button>
+          </template>
+        </el-input>
       </el-form-item>
     </el-form>
   </FormDialog>
@@ -34,6 +38,7 @@ const props = defineProps<Props>()
 const emit = defineEmits(['update:visible', 'saved'])
 
 const formRef = ref()
+const showPassword = ref(false)
 const form = ref({
   type: 'SSH',
   host: '',
