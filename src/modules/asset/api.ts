@@ -22,10 +22,12 @@ import {
 import { Customer, Site, RemoteAccess, HostAsset } from './types'
 
 export const useCustomerList = (params?: any) =>
-  useQuery(['customers', params], () => fetchCustomers(params).then(r => r.data))
+  useQuery(['customers', params], () =>
+    fetchCustomers(params).then(({ data }) => data)
+  )
 
 export const useCustomer = (id: number) =>
-  useQuery(['customer', id], () => fetchCustomer(id).then(r => r.data))
+  useQuery(['customer', id], () => fetchCustomer(id).then(({ data }) => data))
 
 export const useCreateCustomer = () => {
   const qc = useQueryClient()
@@ -49,10 +51,12 @@ export const useDeleteCustomer = () => {
 }
 
 export const useSiteList = (params?: any) =>
-  useQuery(['sites', params], () => fetchSites(params).then(r => r.data))
+  useQuery(['sites', params], () =>
+    fetchSites(params).then(({ data }) => data)
+  )
 
 export const useSite = (id: number) =>
-  useQuery(['site', id], () => fetchSite(id).then(r => r.data))
+  useQuery(['site', id], () => fetchSite(id).then(({ data }) => data))
 
 export const useCreateSite = () => {
   const qc = useQueryClient()
@@ -76,7 +80,9 @@ export const useDeleteSite = () => {
 }
 
 export const useRemoteAccessList = (params?: any) =>
-  useQuery(['remoteAccess', params], () => fetchRemoteAccesses(params).then(r => r.data))
+  useQuery(['remoteAccess', params], () =>
+    fetchRemoteAccesses(params).then(({ data }) => data)
+  )
 
 export const useCreateRemoteAccess = () => {
   const qc = useQueryClient()
@@ -100,7 +106,9 @@ export const useDeleteRemoteAccess = () => {
 }
 
 export const useHostAssetList = (params?: any) =>
-  useQuery(['hostAssets', params], () => fetchHostAssets(params).then(r => r.data))
+  useQuery(['hostAssets', params], () =>
+    fetchHostAssets(params).then(({ data }) => data)
+  )
 
 export const useCreateHostAsset = () => {
   const qc = useQueryClient()

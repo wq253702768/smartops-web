@@ -1,12 +1,10 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    token: '' as string,
-  }),
-  actions: {
-    setToken(token: string) {
-      this.token = token
-    },
-  },
+export const useAuthStore = defineStore('auth', () => {
+  const token = ref('')
+  const setToken = (t: string) => {
+    token.value = t
+  }
+  return { token, setToken }
 })

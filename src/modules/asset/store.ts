@@ -1,13 +1,11 @@
 import { defineStore } from 'pinia'
-import { Customer } from './types'
+import { ref } from 'vue'
+import type { Customer } from './types'
 
-export const useAssetStore = defineStore('asset', {
-  state: () => ({
-    customers: [] as Customer[],
-  }),
-  actions: {
-    setCustomers(list: Customer[]) {
-      this.customers = list
-    },
-  },
+export const useAssetStore = defineStore('asset', () => {
+  const customers = ref<Customer[]>([])
+  const setCustomers = (list: Customer[]) => {
+    customers.value = list
+  }
+  return { customers, setCustomers }
 })
