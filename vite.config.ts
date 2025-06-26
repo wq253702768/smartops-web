@@ -9,4 +9,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+<<<<<<< pyagwk-codex/一键生成前端业务模块
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '/api'),
+      },
+    },
+  },
+=======
+>>>>>>> main
 })
