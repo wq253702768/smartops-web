@@ -9,7 +9,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-<<<<<<< pyagwk-codex/一键生成前端业务模块
+    hmr: {
+      overlay: false,
+    },
+        rewrite: (p) => p.replace(/^\/api/, '/api'),
   server: {
     proxy: {
       '/api': {
